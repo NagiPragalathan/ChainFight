@@ -17,7 +17,10 @@ const Result = () => {
               sent: 31,
             };
           });
-        team = team.sort((a, b) => b.kudos - a.kudos);
+        team = team.sort((a, b) =>{ b.kudos - a.kudos});
+        team.forEach((player, index) => {
+            player.rank = index + 1;
+        });
 
         const randomEmoji = () => {
             const emojis = ['👏','👍','🙌','🤩','🔥','⭐️','🏆','💯'];
@@ -77,7 +80,7 @@ const Result = () => {
         // Render winner card
         const winnerCard = document.getElementById('winner')
         winnerCard.innerHTML = `
-            <div class="u-text-small u-text--medium u-mb--16">Top Sender Last Week</div>
+            <div class="u-text-small u-text--medium u-mb--16">MVP of the Match🔥</div>
             <img class="c-avatar c-avatar--lg" src="${winner.img}"/>
             <h3 class="u-mt--16">${winner.name}</h3>
             <span class="u-text--teal u-text--small">${winner.name}</span>
@@ -87,12 +90,12 @@ const Result = () => {
     return (
         <div className="l-wrapper">
         <div className="c-header">
-            <img
+            {/* <img
             className="c-logo"
             src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/813538/km-logo-color.svg"
             draggable="false"
-            />
-            <button className="c-button c-button--primary">Send Kudos</button>
+            /> */}
+            <button className="c-button c-button--primary">Lobby</button>
         </div>
         <div className="l-grid">
             <div className="l-grid__item l-grid__item--sticky">
@@ -104,7 +107,7 @@ const Result = () => {
                     <h2>3rd Place</h2>
                     </div>
                     <div className="u-text--right">
-                    <div className="u-text--small">My Score</div>
+                    <div className="u-text--small">My Kills</div>
                     <h2>24</h2>
                     </div>
                 </div>
@@ -122,7 +125,7 @@ const Result = () => {
                 <h3>Rank</h3>
                 <select className="c-select">
                     <option selected="selected">
-                    Sunday, Feb. 23 - Sunday, Feb. 30
+                        RoomId : {someValue[0].id}
                     </option>
                 </select>
                 </div>
@@ -137,10 +140,7 @@ const Result = () => {
                         Name
                         </div>
                         <div className="u-text--right u-text--small u-text--medium">
-                        # Kills
-                        </div>
-                        <div className="u-text--right u-text--small u-text--medium">
-                        # Deaths
+                        # Kills/Deaths
                         </div>
                     </div>
                     </li>
