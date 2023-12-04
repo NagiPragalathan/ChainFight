@@ -6,7 +6,7 @@ import { setSomeValue } from '../../slices/yourSlice';
 
 export const Leaderboard = () => {
   const players = usePlayersList(true);
-  const [timer, setTimer] = useState(60); // Initial timer value in seconds (5 minutes)
+  const [timer, setTimer] = useState(10); // Initial timer value in seconds (5 minutes)
   const dispatch = useDispatch();
   const someValue = useSelector(state => state.yourSlice.someValue);
   const handleButtonClick = () => {
@@ -16,8 +16,33 @@ export const Leaderboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      const message = "Are you sure you want to leave? If you leave the game the bedding amount did't fund.";
+      event.returnValue = message; // Standard for most browsers
+      return message; // For some older browsers
+    };
+    const handleUnload = () => {
+      // Perform any cleanup or additional logic before unmounting the component
+
+      // Navigate to another page when the component is unmounted (page reload)
+      history.push('/another-page');
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener('unload', handleUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
+
+  useEffect(() => {
     const intervalId = setInterval(() => {
-      setTimer((prevTimer) => (prevTimer > 0 ? prevTimer - 1 : 0));
+      const storedData = localStorage.getItem("myData");
+      console.log("the data is :",typeof(storedData),storedData,(storedData !== null) && (storedData !== 'false') && (storedData !== 'true'))
+      if((storedData !== null) && (storedData !== 'false') && (storedData !== 'true ')){
+        setTimer((prevTimer) => (prevTimer > 0 ? prevTimer - 1 : 0));
+      }
     }, 1000);
 
     return () => clearInterval(intervalId);
@@ -27,7 +52,6 @@ export const Leaderboard = () => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     console.log(minutes === 0,remainingSeconds < 3)
-    console.log(players[0]?.state)
     if (minutes < 1) {
       var obj = document.getElementById("timer_con");
       if (obj) {
@@ -45,8 +69,12 @@ export const Leaderboard = () => {
 
       }
        if((minutes === 0) && (remainingSeconds < 1)){
+        localStorage.setItem('myData', 'false');
+        localStorage.setItem('myData', 'false');
+        console.log(localStorage.getItem("myData"),typeof(localStorage.getItem("myData")))
         console.log("game over")
         handleButtonClick();
+        // localStorage.setItem('myObject', JSON.stringify(players));
         navigate('/result'); 
       }
     }

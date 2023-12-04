@@ -3,8 +3,16 @@ import "./../styles/result.css"
 import { useDispatch, useSelector } from 'react-redux';
 
 const Result = () => {
+    // const someValue = JSON.parse(localStorage.getItem('myObject'));
     const someValue = useSelector(state => state.yourSlice.someValue);
     const [applyed, setApplyed] = useState(false)
+    const [myrank, setrank] = useState(false)
+    try{
+        var a = someValue[0].id
+    }catch(e){
+        alert("Redirecting to lobby...!")
+        window.location.replace("/")
+    }
     useEffect(()=>{
         setApplyed(true)
         var team = someValue.map((someValue, index) => {
@@ -14,6 +22,7 @@ const Result = () => {
               handle: 'lewishamilton', // Replace with the actual handle if available in your data
               img: someValue.state.profile.photo,
               kudos: someValue.state.kills,
+              deaths: someValue.state.deaths,
               sent: 31,
             };
           });
@@ -21,6 +30,7 @@ const Result = () => {
         team.forEach((player, index) => {
             player.rank = index + 1;
         });
+          
 
         const randomEmoji = () => {
             const emojis = ['👏','👍','🙌','🤩','🔥','⭐️','🏆','💯'];
@@ -49,7 +59,7 @@ const Result = () => {
                         </div>
                         <div class="u-text--right c-kudos">
                             <div class="u-mt--8">
-                                <strong>${member.kudos}</strong> ${randomEmoji()}
+                                <strong>${member.kudos}</strong>/<strong>${member.deaths}</strong> ${randomEmoji()}
                             </div>
                         </div>
                     </div>
@@ -103,12 +113,12 @@ const Result = () => {
                 <div className="c-card__body">
                 <div className="u-display--flex u-justify--space-between">
                     <div className="u-text--left">
-                    <div className="u-text--small">My Rank</div>
-                    <h2>3rd Place</h2>
+                    <div className="u-text--small">Room</div>
+                        <h1>{someValue[0].id}</h1>
                     </div>
                     <div className="u-text--right">
-                    <div className="u-text--small">My Kills</div>
-                    <h2>24</h2>
+                    <div className="u-text--small">Total bedding</div>
+                    <h2>{someValue.kills}/{someValue.deaths}</h2>
                     </div>
                 </div>
                 </div>

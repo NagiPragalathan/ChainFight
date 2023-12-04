@@ -37,10 +37,12 @@ export const Experience = ({ downgradedPerformance = false }) => {
       });
     });
   };
+  
 
   useEffect(() => {
     start();
   }, []);
+
 
   const [bullets, setBullets] = useState([]);
   const [hits, setHits] = useState([]);

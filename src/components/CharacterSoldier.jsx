@@ -53,6 +53,11 @@ export function CharacterSoldier({
   }, [animation]);
 
   console.log(actions)
+  console.log(localStorage.getItem('myData'))
+  localStorage.setItem('myData', 'true');
+  localStorage.setItem('myData', 'true');
+  localStorage.setItem('myData', 'true');
+  localStorage.setItem('myData', 'true');
 
   const playerColorMaterial = useMemo(
     () =>
