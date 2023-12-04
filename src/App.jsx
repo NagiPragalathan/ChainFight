@@ -10,7 +10,6 @@ import { Leaderboard } from "./components/Leaderboard";
   return (
     <>
       <Loader />
-      <Leaderboard />
       <Canvas
         shadows
         camera={{ position: [0, 30, 0], fov: 30, near: 2 }}
@@ -37,6 +36,7 @@ import { Leaderboard } from "./components/Leaderboard";
           </EffectComposer>
         )}
       </Canvas>
+      <Leaderboard />
       
     </>
   );

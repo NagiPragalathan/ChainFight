@@ -7,7 +7,7 @@ const Result = () => {
     const [applyed, setApplyed] = useState(false)
     useEffect(()=>{
         setApplyed(true)
-        const team = someValue.map((someValue, index) => {
+        var team = someValue.map((someValue, index) => {
             return {
               rank: index + 1,
               name: someValue.state.profile.name,
@@ -17,6 +17,7 @@ const Result = () => {
               sent: 31,
             };
           });
+        team = team.sort((a, b) => b.kudos - a.kudos);
 
         const randomEmoji = () => {
             const emojis = ['👏','👍','🙌','🤩','🔥','⭐️','🏆','💯'];
@@ -70,8 +71,8 @@ const Result = () => {
             console.log("the function did not called...")
         }
         // Find Winner from sent kudos by sorting the drivers in the team array
-        let sortedTeam = team.sort((a, b) => b.kudos - a.kudos);
-        let winner = sortedTeam[0]
+        // let sortedTeam = team.sort((a, b) => b.kudos - a.kudos);
+        let winner = team[0]
 
         // Render winner card
         const winnerCard = document.getElementById('winner')
