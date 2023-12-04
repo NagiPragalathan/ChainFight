@@ -70,7 +70,7 @@ const Result = () => {
             console.log("the function did not called...")
         }
         // Find Winner from sent kudos by sorting the drivers in the team array
-        let sortedTeam = team.sort((a, b) => b.sent - a.sent)
+        let sortedTeam = team.sort((a, b) => b.kudos - a.kudos);
         let winner = sortedTeam[0]
 
         // Render winner card
