@@ -6,7 +6,7 @@ import { setSomeValue } from '../../slices/yourSlice';
 
 export const Leaderboard = () => {
   const players = usePlayersList(true);
-  const [timer, setTimer] = useState(10); // Initial timer value in seconds (5 minutes)
+  const [timer, setTimer] = useState(60); // Initial timer value in seconds (5 minutes)
   const dispatch = useDispatch();
   const someValue = useSelector(state => state.yourSlice.someValue);
   const handleButtonClick = () => {
