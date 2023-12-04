@@ -5,8 +5,7 @@ import { Physics } from "@react-three/rapier";
 import { Suspense, useState } from "react";
 import { Experience } from "./components/Experience";
 import { Leaderboard } from "./components/Leaderboard";
-
-function App() {
+  function App() {
   const [downgradedPerformance, setDowngradedPerformance] = useState(false);
   return (
     <>
@@ -38,6 +37,7 @@ function App() {
           </EffectComposer>
         )}
       </Canvas>
+      
     </>
   );
 }

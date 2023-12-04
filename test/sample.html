@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Voice Chat</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #app {
+      text-align: center;
+    }
+
+    #voice-chat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    button {
+      margin-top: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div id="voice-chat">
+      <audio id="audio" controls></audio>
+      <button id="startButton">Start Voice Chat</button>
+      <button id="stopButton">Stop Voice Chat</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const audio = document.getElementById('audio');
+      const startButton = document.getElementById('startButton');
+      const stopButton = document.getElementById('stopButton');
+
+      let mediaRecorder;
+      let audioChunks = [];
+
+      // Function to start voice chat
+      const startVoiceChat = async () => {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+        mediaRecorder = new MediaRecorder(stream);
+
+        mediaRecorder.ondataavailable = (event) => {
+          if (event.data.size > 0) {
+            audioChunks.push(event.data);
+          }
+        };
+
+        mediaRecorder.onstop = () => {
+          const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+          const audioUrl = URL.createObjectURL(audioBlob);
+          audio.src = audioUrl;
+        };
+
+        mediaRecorder.start();
+        startButton.disabled = true;
+        stopButton.disabled = false;
+      };
+
+      // Function to stop voice chat
+      const stopVoiceChat = () => {
+        if (mediaRecorder.state === 'recording') {
+          mediaRecorder.stop();
+          startButton.disabled = false;
+          stopButton.disabled = true;
+        }
+      };
+
+      startButton.addEventListener('click', startVoiceChat);
+      stopButton.addEventListener('click', stopVoiceChat);
+    });
+  </script>
+</body>
+</html>

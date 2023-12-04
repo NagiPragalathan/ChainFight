@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { usePlayersList } from "playroomkit";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSomeValue } from '../../slices/yourSlice';
 
 export const Leaderboard = () => {
   const players = usePlayersList(true);
-  const [timer, setTimer] = useState(10); // Initial timer value in seconds (5 minutes)
+  const [timer, setTimer] = useState(60); // Initial timer value in seconds (5 minutes)
+  const dispatch = useDispatch();
+  const someValue = useSelector(state => state.yourSlice.someValue);
+  const handleButtonClick = () => {
+    dispatch(setSomeValue(players));
+  };
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -17,7 +26,7 @@ export const Leaderboard = () => {
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-    console.log(minutes === 0,remainingSeconds < 1)
+    console.log(minutes === 0,remainingSeconds < 3)
     console.log(players[0]?.state)
     if (minutes < 1) {
       var obj = document.getElementById("timer_con");
@@ -30,18 +39,15 @@ export const Leaderboard = () => {
         obj.style.boxShadow = '0px 0px 20px 20px #ff000059';
         obj.style.border = '2px solid rgb(252, 38, 68)';
         obj.style.transition = 'background-color 0.5s ease-in-out';
-      }else if(minutes === 0 && remainingSeconds < 1){
-        const navigate = useNavigate();
 
-        const handleButtonClick = () => {
-          // Example data to be transferred
-          const dataToSend = { key: 'value' };
 
-          // Navigate to another page and pass data
-          navigate('/otherpage', { state: { data: dataToSend } });
-        }
-        handleButtonClick()
+        console.log("form redux:",someValue )
+
+      }
+       if((minutes === 0) && (remainingSeconds < 1)){
         console.log("game over")
+        handleButtonClick();
+        navigate('/result'); 
       }
     }
     return `${String(minutes).padStart(2, "0")}:${String(
