@@ -1,0 +1,5 @@
+teater
+car
+train
+
+shop
