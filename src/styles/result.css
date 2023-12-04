@@ -33,6 +33,13 @@ html {
     height: 100%;
   }
   
+.c-list__item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
   body {
     background: var(--bg);
     color: var(--color);

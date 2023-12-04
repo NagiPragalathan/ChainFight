@@ -30,7 +30,7 @@ const Result = () => {
         team.forEach((player, index) => {
             player.rank = index + 1;
         });
-          
+        team.reverse();
 
         const randomEmoji = () => {
             const emojis = ['👏','👍','🙌','🤩','🔥','⭐️','🏆','💯'];
@@ -44,11 +44,26 @@ const Result = () => {
         if (applyed === false){
             console.log(applyed)
             console.log("the function are called...")
+            let newRow = document.createElement('li');
+                newRow.classList = 'c-list__item';
+                newRow.innerHTML = `
+                <div className="c-list__grid" style="display: contents;">
+                    <div className="u-text--left u-text--small u-text--medium">
+                    Rank
+                    </div>
+                    <div className="u-text--left u-text--small u-text--medium">
+                    Name
+                    </div>
+                    <div className="u-text--right u-text--small u-text--medium">
+                    # Kills/Deaths
+                    </div>
+                </div>`
+            list.appendChild(newRow)
             team.forEach(member => {
                 let newRow = document.createElement('li');
                 newRow.classList = 'c-list__item';
                 newRow.innerHTML = `
-                    <div class="c-list__grid">
+                    <div class="c-list__grid" style="display: contents;">
                         <div class="c-flag c-place u-bg--transparent">${member.rank}</div>
                         <div class="c-media">
                             <img class="c-avatar c-media__img" src="${member.img}" />
