@@ -30,7 +30,6 @@ const Result = () => {
         team.forEach((player, index) => {
             player.rank = index + 1;
         });
-        team.reverse();
 
         const randomEmoji = () => {
             const emojis = ['👏','👍','🙌','🤩','🔥','⭐️','🏆','💯'];
