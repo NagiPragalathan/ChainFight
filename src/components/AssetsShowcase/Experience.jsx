@@ -176,7 +176,7 @@ export const players_data = [
   },
   {
     path: "models/cars/semi_scene.glb",
-    mainColor: "#ff6666",
+    mainColor: "#c0ffe1",
     name: "Nagi🌿🌙",
     description: "Nagi, the serene mystic, harnesses the power of nature with a tranquil presence and healing touch. ",
     price: 96,
@@ -339,7 +339,6 @@ export const Experience = (props) => {
   }
   const html_content = () =>{
     if(props.data === '1'){
-      console.log(players_data)
       return  players_data.map((scene, index) => (
         <mesh
           key={index}
@@ -348,7 +347,7 @@ export const Experience = (props) => {
           <planeGeometry args={[viewport.width, viewport.height]} />
           <meshBasicMaterial toneMapped={false}>
             <RenderTexture attach="map">
-              <Players {...players_data} />
+              <Players {...scene} />
             </RenderTexture>
           </meshBasicMaterial>
         </mesh>
@@ -370,7 +369,6 @@ export const Experience = (props) => {
       ))
     }
     else if(props.data === '3'){
-      console.log("before cares : ",cars)
       return  cars.map((scene, index) => (
         <mesh
           key={index}
@@ -379,7 +377,7 @@ export const Experience = (props) => {
           <planeGeometry args={[viewport.width, viewport.height]} />
           <meshBasicMaterial toneMapped={false}>
             <RenderTexture attach="map">
-              <Cars {...cars} />
+              <Cars {...scene} />
             </RenderTexture>
           </meshBasicMaterial>
         </mesh>
@@ -393,7 +391,7 @@ export const Experience = (props) => {
           <planeGeometry args={[viewport.width, viewport.height]} />
           <meshBasicMaterial toneMapped={false}>
             <RenderTexture attach="map">
-            <Players {...players_data} />
+            <Players {...scene} />
             </RenderTexture>
           </meshBasicMaterial>
         </mesh>
