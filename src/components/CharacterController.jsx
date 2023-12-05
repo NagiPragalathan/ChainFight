@@ -7,11 +7,29 @@ import { CharacterSoldier } from "./CharacterSoldier";
 const MOVEMENT_SPEED = 202;
 const FIRE_RATE = 380;
 const JUMP_FORCE = 20;
+var i = 0
 export const WEAPON_OFFSET = {
   x: -0.2,
   y: 1.4,
   z: 0.8,
 };
+
+const WEAPONS = [
+  "GrenadeLauncher",
+  "AK",
+  "Knife_1",
+  "Knife_2",
+  "Pistol", 
+  "Revolver",
+  "Revolver_Small",
+  "RocketLauncher",
+  "ShortCannon",
+  "SMG",
+  "Shotgun",
+  "Shovel",
+  "Sniper",
+  "Sniper_2",
+];
 
 export const CharacterController = ({
   state,
@@ -22,12 +40,14 @@ export const CharacterController = ({
   downgradedPerformance,
   ...props
 }) => {
+  const [weapon, setWeapon] = useState("AK");
+  console.log("useState call :",weapon)
   const group = useRef();
   const character = useRef();
   const rigidbody = useRef();
   const [animation, setAnimation] = useState("Idle");
-  const [weapon, setWeapon] = useState("AK");
   const lastShoot = useRef(0);
+  
 
   const scene = useThree((state) => state.scene);
   const spawnRandomly = () => {
@@ -66,8 +86,23 @@ export const CharacterController = ({
     }
   }, [state.state.health]);
 
+
+
   useFrame((_, delta) => {
     // CAMERA FOLLOW
+
+    if (joystick.isPressed("swap")) {
+      setWeapon(WEAPONS[i]);
+      
+      if(i == WEAPONS.length){
+        i=0
+      }else{
+        i++;
+      }
+      // CharacterSoldier({color:state.state.profile?.color,animation:animation,weapon:weapon})
+      console.log("Weapons are swaapped...!", weapon)
+    }
+
     if (controls.current) {
       const cameraDistanceY = window.innerWidth < 1024 ? 16 : 20;
       const cameraDistanceZ = window.innerWidth < 1024 ? 12 : 16;
@@ -106,6 +141,7 @@ export const CharacterController = ({
       setAnimation("Idle");
     }
     const playerWorldPos = vec3(rigidbody.current.translation());
+
     if (joystick.isPressed("jump") && playerWorldPos.y<2) {
       setAnimation("Run");
       character.current.rotation.y = angle;
