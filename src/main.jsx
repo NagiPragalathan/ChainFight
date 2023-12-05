@@ -9,6 +9,8 @@ import { Provider } from 'react-redux';
 import store from '../store';
 import Lobby from './components/Lobby'
 import Options from './components/Options'
+import StoreOptions from './components/StoreOption'
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     {/* <App /> */}
@@ -23,6 +25,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/Guns" exact element={<SlideApp data={'2'} />} />
           <Route path="/Car" exact element={<SlideApp data={'3'} />} />
           <Route path="/options" exact element={<Options />} />
+          <Route path="/optstore" exact element={<StoreOptions />} />
         </Routes>
       </Provider>
     </Router>
