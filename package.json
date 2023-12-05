@@ -16,6 +16,7 @@
     "@reduxjs/toolkit": "^2.0.0",
     "@types/three": "0.152.1",
     "browserify-global": "^1.1.2",
+    "jotai": "^2.6.0",
     "leva": "^0.9.35",
     "playroomkit": "^0.0.36",
     "react": "^18.2.0",

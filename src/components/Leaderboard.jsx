@@ -39,7 +39,7 @@ export const Leaderboard = () => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       const storedData = localStorage.getItem("myData");
-      console.log("the data is :",typeof(storedData),storedData,(storedData !== null) && (storedData !== 'false') && (storedData !== 'true'))
+      // console.log("the data is :",typeof(storedData),storedData,(storedData !== null) && (storedData !== 'false') && (storedData !== 'true'))
       if((storedData !== null) && (storedData !== 'false') && (storedData !== 'true ')){
         setTimer((prevTimer) => (prevTimer > 0 ? prevTimer - 1 : 0));
       }
@@ -51,7 +51,7 @@ export const Leaderboard = () => {
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-    console.log(minutes === 0,remainingSeconds < 3)
+    // console.log(minutes === 0,remainingSeconds < 3)
     if (minutes < 1) {
       var obj = document.getElementById("timer_con");
       if (obj) {
@@ -65,14 +65,14 @@ export const Leaderboard = () => {
         obj.style.transition = 'background-color 0.5s ease-in-out';
 
 
-        console.log("form redux:",someValue )
+        // console.log("form redux:",someValue )
 
       }
        if((minutes === 0) && (remainingSeconds < 1)){
         localStorage.setItem('myData', 'false');
         localStorage.setItem('myData', 'false');
-        console.log(localStorage.getItem("myData"),typeof(localStorage.getItem("myData")))
-        console.log("game over")
+        // console.log(localStorage.getItem("myData"),typeof(localStorage.getItem("myData")))
+        // console.log("game over")
         handleButtonClick();
         // localStorage.setItem('myObject', JSON.stringify(players));
         navigate('/result'); 

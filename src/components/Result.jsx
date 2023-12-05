@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import "./../styles/result.css"
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 
 const Result = () => {
     // const someValue = JSON.parse(localStorage.getItem('myObject'));
@@ -119,7 +121,7 @@ const Result = () => {
             src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/813538/km-logo-color.svg"
             draggable="false"
             /> */}
-            <button className="c-button c-button--primary">Lobby</button>
+            <button className="c-button c-button--primary"><a href="lobby">Lobby</a></button>
         </div>
         <div className="l-grid">
             <div className="l-grid__item l-grid__item--sticky">

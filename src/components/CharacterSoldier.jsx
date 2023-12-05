@@ -31,6 +31,7 @@ export function CharacterSoldier({
   weapon = "AK",
   ...props
 }) {
+  console.log("the gun is : ",weapon,"from char")
   const group = useRef();
   const { scene, materials, animations } = useGLTF(
     "/models/Character_Soldier.gltf"
@@ -71,7 +72,8 @@ export function CharacterSoldier({
     WEAPONS.forEach((wp) => {
       const isCurrentWeapon = wp === weapon;
       nodes[wp].visible = isCurrentWeapon;
-    });
+      console.log(isCurrentWeapon, "working... change wepon")
+    },[]);
 
     // ASSIGNING CHARACTER COLOR
     nodes.Body.traverse((child) => {
