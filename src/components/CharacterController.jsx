@@ -91,17 +91,17 @@ export const CharacterController = ({
   useFrame((_, delta) => {
     // CAMERA FOLLOW
 
-    if (joystick.isPressed("swap")) {
-      setWeapon(WEAPONS[i]);
+    // if (joystick.isPressed("swap")) {
+    //   setWeapon(WEAPONS[i]);
       
-      if(i == WEAPONS.length){
-        i=0
-      }else{
-        i++;
-      }
-      // CharacterSoldier({color:state.state.profile?.color,animation:animation,weapon:weapon})
-      console.log("Weapons are swaapped...!", weapon)
-    }
+    //   if(i == WEAPONS.length){
+    //     i=0
+    //   }else{
+    //     i++;
+    //   }
+    //   // CharacterSoldier({color:state.state.profile?.color,animation:animation,weapon:weapon})
+    //   console.log("Weapons are swaapped...!", weapon)
+    // }
 
     if (controls.current) {
       const cameraDistanceY = window.innerWidth < 1024 ? 16 : 20;

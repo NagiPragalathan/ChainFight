@@ -5,3 +5,23 @@ train
 shop
 
 https://reactjsexample.com/a-simple-3d-table-configurator-using-react-three-fiber/
+
+
+
+spain
+store
+my collection{
+    player,
+    guns,
+    car,
+    map
+}
+
+https://github.com/wass08/r3f-vite-starter
+
+
+Gurk, Gyanlaksmi, rohit, nagi, Vairam, thiru, prashanth 
+
+Strength: 85
+Battle Experience: 1200 X
+Armor Rating: 90

@@ -12,8 +12,203 @@ import { useControls } from "leva";
 import { useEffect, useRef } from "react";
 import { slideAtom } from "./Overlay";
 import { Scene } from "./Scene";
+import { Players } from "./players";
+import { Cars } from "./cars";
+
+const WEAPONS = [
+  "GrenadeLauncher",
+  "AK",
+  "Knife_1",
+  "Knife_2",
+  "Pistol", 
+  "Revolver",
+  "Revolver_Small",
+  "RocketLauncher",
+  "ShortCannon",
+  "SMG",
+  "Shotgun",
+  "Shovel",
+  "Sniper",
+  "Sniper_2",
+];
 
 export const scenes = [
+  {
+    path: "models/cars/cybertruck_scene.glb",
+    name: "GrenadeLauncher",
+    mainColor: ["#ffe6b3", "#c0e6ff"], // Light colors
+    description: "A powerful launcher that hurls explosive grenades.",
+    price: "Slow",
+    range: "Long",
+  },
+  {
+    path: "models/cars/cybertruck_scene.glb",
+    name: "AK",
+    mainColor: ["#ffb3b3", "#ff9999"], // Light colors
+    description: "A reliable assault rifle known for its rapid fire.",
+    price: "High",
+    range: "Medium",
+  },
+  {
+    path: "models/cars/cybertruck_scene.glb",
+    name: "Knife_1",
+    mainColor: ["#ff9999", "#ff6666"], // Light colors
+    description: "A basic knife for close-quarters combat.",
+    price: "N/A",
+    range: "Short",
+  },
+  {
+    path: "models/cars/cybertruck_scene.glb",
+    name: "Knife_2",
+    mainColor: ["#ffd699", "#ffb366"], // Light colors
+    description: "A serrated blade designed for swift and precise strikes.",
+    price: "N/A",
+    range: "Short",
+  },
+  {
+    path: "models/cars/cybertruck_scene.glb",
+    name: "Pistol",
+    mainColor: ["#cccccc", "#999999"], // Light colors
+    description: "Compact sidearm with moderate firepower and versatility.",
+    price: "Moderate",
+    range: "Medium",
+  },
+  {
+    path: "models/cars/cybertruck_scene.glb",
+    name: "Revolver",
+    mainColor: ["#ffcc99", "#cc9966"], // Light colors
+    description: "Heavy revolver with high damage but slow reload.",
+    price: "Slow",
+    range: "Medium",
+  },
+  {
+    path: "models/cars/cybertruck_scene.glb",
+    name: "Revolver_Small",
+    mainColor: ["#ffd699", "#ffb366"], // Light colors
+    description: "A compact version of the heavy revolver for quick draws.",
+    price: "Moderate",
+    range: "Medium",
+  },
+  {
+    path: "models/cars/cybertruck_scene.glb",
+    name: "RocketLauncher",
+    mainColor: ["#ff9999", "#ff6666"], // Light colors
+    description: "Devastating launcher that fires powerful rockets.",
+    price: "Slow",
+    range: "Long",
+  },
+  {
+    path: "models/cars/cybertruck_scene.glb",
+    name: "ShortCannon",
+    mainColor: ["#ffd699", "#ffb366"], // Light colors
+    description: "Small yet potent cannon for explosive short-range attacks.",
+    price: "Slow",
+    range: "Short",
+  },
+  {
+    path: "models/cars/cybertruck_scene.glb",
+    name: "SMG",
+    mainColor: ["#ffb3b3", "#ff9999"], // Light colors
+    description: "Submachine gun known for its rapid fire and mobility.",
+    price: "High",
+    range: "Medium",
+  },
+  {
+    path: "models/cars/cybertruck_scene.glb",
+    name: "Shotgun",
+    mainColor: ["#ffcc99", "#cc9966"], // Light colors
+    description: "Close-range weapon that unleashes a spread of pellets.",
+    price: "Moderate",
+    range: "Short",
+  },
+  {
+    path: "models/cars/cybertruck_scene.glb",
+    name: "Shovel",
+    mainColor: ["#ffd699", "#ffb366"], // Light colors
+    description: "Sturdy shovel for melee combat with a crushing impact.",
+    price: "N/A",
+    range: "Short",
+  },
+  {
+    path: "models/cars/cybertruck_scene.glb",
+    name: "Sniper",
+    mainColor: ["#ffb3b3", "#ff9999"], // Light colors
+    description: "High-powered sniper rifle for precision long-range shots.",
+    price: "Slow",
+    range: "Long",
+  },
+  {
+    path: "models/cars/cybertruck_scene.glb",
+    name: "Sniper_2",
+    mainColor: ["#ffcc99", "#cc9966"], // Light colors
+    description: "Advanced sniper rifle with enhanced scope and accuracy.",
+    price: "Slow",
+    range: "Long",
+  },
+];
+
+
+export const players_data = [
+  {
+    path: "models/cars/cybertruck_scene.glb",
+    mainColor: "#ffdec0",
+    name: "Gurk🛡️🔱",
+    description:
+      "Gurk, the indomitable warrior, wields a mighty axe, embodying strength and unwavering resolve.",
+    price: 85,
+    range: 90,
+  },
+  {
+    path: "models/cars/model3_scene.glb",
+    mainColor: "#c0ffe1",
+    name: "Gyanlaksmi⚔️🔮",
+    description: "Gyanlakshmi, the enigmatic sage, emanates wisdom and mystic energy, adorned with celestial symbols. ",
+    price: 95,
+    range: 40,
+  },
+  {
+    path: "models/cars/semi_scene.glb",
+    mainColor: "#f9c0ff",
+    name: "Rohit🥊👊",
+    description: "Rohit, the versatile artisan, creates masterpieces with a skilled hand and a heart full of passion",
+    price: 60,
+    range: 95,
+  },
+  {
+    path: "models/cars/semi_scene.glb",
+    mainColor: "#ff6666",
+    name: "Nagi🌿🌙",
+    description: "Nagi, the serene mystic, harnesses the power of nature with a tranquil presence and healing touch. ",
+    price: 96,
+    range: 20,
+  },
+  {
+    path: "models/cars/semi_scene.glb",
+    mainColor: "#ffba70",
+    name: "Thiru🥷🪓",
+    description: "Thiru, the enigmatic sorcerer, weaves arcane spells with ancient knowledge and a gaze that pierces the ethereal. ",
+    price: 100,
+    range: 40,
+  },
+  {
+    path: "models/cars/semi_scene.glb",
+    mainColor: "#70ffb3",
+    name: "Vairam🗡️🌒",
+    description: "Vairam, the elusive rogue, navigates shadows with a dagger's grace and a mischievous glint in their eye.  ",
+    price: 100,
+    range: 95,
+  },
+  {
+    path: "models/cars/semi_scene.glb",
+    mainColor: "#ffdb70",
+    name: "Prashant",
+    description: "Prashant, the wise scholar, imparts knowledge with a quill in hand and an aura of sagacity. 🐉🕊️",
+    price: 87,
+    range: 96,
+  },
+];
+
+export const cars = [
   {
     path: "models/cars/cybertruck_scene.glb",
     mainColor: "#f9c0ff",
@@ -39,15 +234,8 @@ export const scenes = [
     price: 150000,
     range: 800,
   },
-  {
-    path: "models/cars/model3_scene.glb",
-    mainColor: "#ffdec0",
-    name: "Semi",
-    description: "The Future of Trucking",
-    price: 150000,
-    range: 800,
-  },
 ];
+
 
 const CameraHandler = ({ slideDistance }) => {
   const viewport = useThree((state) => state.viewport);
@@ -133,7 +321,84 @@ const CameraHandler = ({ slideDistance }) => {
   );
 };
 
-export const Experience = () => {
+export const Experience = (props) => {
+  console.log(props.data, props.data === '1' )
+  var out = scenes;
+  const senario = () =>{
+    if(props.data === '1'){
+      return <Players {...players_data} />
+    } else if(props.data === '2'){
+      out = scenes;
+      return <Scene {...scenes} />
+    }else if(props.data === '3'){
+      out = cars;
+      return <Cars {...cars} />
+    }else{
+      return <Players {...players_data} />
+    }
+  }
+  const html_content = () =>{
+    if(props.data === '1'){
+      return  players_data.map((scene, index) => (
+        <mesh
+          key={index}
+          position={[index * (viewport.width + slideDistance), 0, 0]}
+        >
+          <planeGeometry args={[viewport.width, viewport.height]} />
+          <meshBasicMaterial toneMapped={false}>
+            <RenderTexture attach="map">
+              <Players {...players_data} />
+            </RenderTexture>
+          </meshBasicMaterial>
+        </mesh>
+      ))
+    }
+    else if(props.data === '2'){
+      return  scenes.map((scene, index) => (
+        <mesh
+          key={index}
+          position={[index * (viewport.width + slideDistance), 0, 0]}
+        >
+          <planeGeometry args={[viewport.width, viewport.height]} />
+          <meshBasicMaterial toneMapped={false}>
+            <RenderTexture attach="map">
+              <Scene {...scenes} />
+            </RenderTexture>
+          </meshBasicMaterial>
+        </mesh>
+      ))
+    }
+    else if(props.data === '3'){
+      return  cars.map((scene, index) => (
+        <mesh
+          key={index}
+          position={[index * (viewport.width + slideDistance), 0, 0]}
+        >
+          <planeGeometry args={[viewport.width, viewport.height]} />
+          <meshBasicMaterial toneMapped={false}>
+            <RenderTexture attach="map">
+              <Cars {...cars} />
+            </RenderTexture>
+          </meshBasicMaterial>
+        </mesh>
+      ))
+    }else{
+      return  players_data.map((scene, index) => (
+        <mesh
+          key={index}
+          position={[index * (viewport.width + slideDistance), 0, 0]}
+        >
+          <planeGeometry args={[viewport.width, viewport.height]} />
+          <meshBasicMaterial toneMapped={false}>
+            <RenderTexture attach="map">
+            <Players {...players_data} />
+            </RenderTexture>
+          </meshBasicMaterial>
+        </mesh>
+      ))
+    }
+   
+  }
   const viewport = useThree((state) => state.viewport);
   const { slideDistance } = useControls({
     slideDistance: {
@@ -182,19 +447,7 @@ export const Experience = () => {
         fadeDistance={50}
         fadeStrength={5}
       />
-      {scenes.map((scene, index) => (
-        <mesh
-          key={index}
-          position={[index * (viewport.width + slideDistance), 0, 0]}
-        >
-          <planeGeometry args={[viewport.width, viewport.height]} />
-          <meshBasicMaterial toneMapped={false}>
-            <RenderTexture attach="map">
-              <Scene {...scene} />
-            </RenderTexture>
-          </meshBasicMaterial>
-        </mesh>
-      ))}
+      {html_content()}
     </>
   );
 };

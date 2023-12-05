@@ -18,7 +18,7 @@ import { useAnimations } from "@react-three/drei";
 import { Color, LoopOnce, MeshStandardMaterial } from "three";
 
 
-export const Scene = ({ mainColor, path, ...props }) => {
+export const Players = ({ mainColor, path, ...props }) => {
   const { scene, materials, animations } = useGLTF(
     "/models/Character_Soldier.gltf"
   );
@@ -28,11 +28,6 @@ export const Scene = ({ mainColor, path, ...props }) => {
   const group = useRef();
   const { nodes } = useGraph(clone);
   const { actions } = useAnimations(animations, group);
-  try{
-    mainColor = mainColor[Math.floor(Math.random() * mainColor.length)]
-  }catch{
-    mainColor = mainColor
-  }
   
   useEffect(() => {
     scene.traverse((child) => {
@@ -67,7 +62,7 @@ export const Scene = ({ mainColor, path, ...props }) => {
     "Sniper_2",
   ];
   WEAPONS.forEach((wp) => {
-    const isCurrentWeapon = wp === "AK";
+    const isCurrentWeapon = wp === " ";
     nodes[wp].visible = isCurrentWeapon;
     console.log(isCurrentWeapon, "working... change wepon")
   },[]);
@@ -76,7 +71,7 @@ export const Scene = ({ mainColor, path, ...props }) => {
     <>
       <color attach="background" args={["#ffffff"]} />
       <group {...props} dispose={null}>
-        <PerspectiveCamera makeDefault position={[-5, 6, 1]} near={0.2} />
+        <PerspectiveCamera makeDefault position={[3, 3, 8]} near={0.5} />
         <OrbitControls
           autoRotate
           enablePan={false}
@@ -107,14 +102,14 @@ export const Scene = ({ mainColor, path, ...props }) => {
             <skinnedMesh
               name="Cube004_2"
               geometry={nodes.Cube004_2.geometry}
-              material={materials.Black}
+              material={playerColorMaterial}
               skeleton={nodes.Cube004_2.skeleton}
               castShadow
             />
             <skinnedMesh
               name="Cube004_3"
               geometry={nodes.Cube004_3.geometry}
-              material={materials.Black}
+              material={playerColorMaterial}
               skeleton={nodes.Cube004_3.skeleton}
               castShadow
             />
