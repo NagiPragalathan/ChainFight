@@ -7,19 +7,29 @@ export const slideAtom = atom(0);
 export const Overlay = (props) => {
 
   var useSource = scenes
+  var range = ""
+  var price = ""
 
   if(props.data === '1'){
     useSource = players_data
+    range = "Armor Rating"
+    price = "Strength of the Character"
   }
   else if(props.data === '2'){
     useSource = scenes
+    range = "Gun Range :"
+    price = "Rate of Fire"
   }
   else if(props.data === '3'){
     useSource = cars
+    range = "With one single charge"
+    price = "After Federal Tax Credit"
   }
   else{
     useSource = players_data
   }
+
+  console.log("current screen : ", useSource)
   const [slide, setSlide] = useAtom(slideAtom);
   const [displaySlide, setDisplaySlide] = useState(slide);
   const [visible, setVisible] = useState(false);
@@ -115,10 +125,10 @@ export const Overlay = (props) => {
                   />
                 </svg>
                 <p className="font-semibold text-3xl">
-                  ${useSource[displaySlide].price.toLocaleString()}
+                  {useSource[displaySlide].price.toLocaleString()}
                 </p>
               </div>
-              <p className="text-sm opacity-80">After Federal Tax Credit</p>
+              <p className="text-sm opacity-80">{price}</p>
             </div>
             <div className="flex flex-col items-center">
               <div className="flex items-center gap-2">
@@ -137,10 +147,10 @@ export const Overlay = (props) => {
                   />
                 </svg>
                 <p className="font-semibold text-3xl">
-                  {useSource[displaySlide].range}km
+                  {useSource[displaySlide].range}
                 </p>
               </div>
-              <p className="text-sm opacity-80">With one single charge</p>
+              <p className="text-sm opacity-80">{range}</p>
             </div>
           </div>
         </div>
