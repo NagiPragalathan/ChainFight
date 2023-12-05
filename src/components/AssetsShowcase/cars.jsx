@@ -15,6 +15,7 @@ import React, { useEffect } from "react";
 import { DEG2RAD } from "three/src/math/MathUtils";
 
 export const Cars = ({ mainColor, path, ...props }) => {
+  console.log("path is",path);
   const { nodes, materials, scene } = useGLTF(path);
   useEffect(() => {
     scene.traverse((child) => {

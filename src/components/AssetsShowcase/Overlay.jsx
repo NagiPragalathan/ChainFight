@@ -1,10 +1,25 @@
 import { atom, useAtom } from "jotai";
 import { useEffect, useState } from "react";
-import { scenes } from "./Experience";
+import { scenes, players_data, cars } from "./Experience";
 
 export const slideAtom = atom(0);
 
-export const Overlay = () => {
+export const Overlay = (props) => {
+
+  var useSource = scenes
+
+  if(props.data === '1'){
+    useSource = players_data
+  }
+  else if(props.data === '2'){
+    useSource = scenes
+  }
+  else if(props.data === '3'){
+    useSource = cars
+  }
+  else{
+    useSource = players_data
+  }
   const [slide, setSlide] = useAtom(slideAtom);
   const [displaySlide, setDisplaySlide] = useState(slide);
   const [visible, setVisible] = useState(false);
@@ -41,7 +56,7 @@ export const Overlay = () => {
         <div className="absolute top-0 bottom-0 left-0 right-0 flex-1 flex items-center justify-between p-4">
           <svg
             onClick={() =>
-              setSlide((prev) => (prev > 0 ? prev - 1 : scenes.length - 1))
+              setSlide((prev) => (prev > 0 ? prev - 1 : useSource.length - 1))
             }
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -65,7 +80,7 @@ export const Overlay = () => {
             stroke="currentColor"
             className="w-10 h-10 pointer-events-auto hover:opacity-60 transition-opacity cursor-pointer"
             onClick={() =>
-              setSlide((prev) => (prev < scenes.length - 1 ? prev + 1 : 0))
+              setSlide((prev) => (prev < useSource.length - 1 ? prev + 1 : 0))
             }
           >
             <path
@@ -77,10 +92,10 @@ export const Overlay = () => {
         </div>
         <div className="bg-gradient-to-t from-white/90 pt-20 pb-10 p-4 flex items-center flex-col text-center">
           <h1 className="text-5xl font-extrabold">
-            {scenes[displaySlide].name}
+            {useSource[displaySlide].name}
           </h1>
           <p className="text-opacity-60 italic">
-            {scenes[displaySlide].description}
+            {useSource[displaySlide].description}
           </p>
           <div className="flex items-center gap-12 mt-10">
             <div className="flex flex-col items-center">
@@ -100,7 +115,7 @@ export const Overlay = () => {
                   />
                 </svg>
                 <p className="font-semibold text-3xl">
-                  ${scenes[displaySlide].price.toLocaleString()}
+                  ${useSource[displaySlide].price.toLocaleString()}
                 </p>
               </div>
               <p className="text-sm opacity-80">After Federal Tax Credit</p>
@@ -122,7 +137,7 @@ export const Overlay = () => {
                   />
                 </svg>
                 <p className="font-semibold text-3xl">
-                  {scenes[displaySlide].range}km
+                  {useSource[displaySlide].range}km
                 </p>
               </div>
               <p className="text-sm opacity-80">With one single charge</p>

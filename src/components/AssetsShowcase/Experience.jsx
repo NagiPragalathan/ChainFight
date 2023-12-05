@@ -339,6 +339,7 @@ export const Experience = (props) => {
   }
   const html_content = () =>{
     if(props.data === '1'){
+      console.log(players_data)
       return  players_data.map((scene, index) => (
         <mesh
           key={index}
@@ -369,6 +370,7 @@ export const Experience = (props) => {
       ))
     }
     else if(props.data === '3'){
+      console.log("before cares : ",cars)
       return  cars.map((scene, index) => (
         <mesh
           key={index}
