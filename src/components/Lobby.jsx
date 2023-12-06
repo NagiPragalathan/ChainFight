@@ -1,12 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import {  Link } from "react-router-dom";
 
 const Lobby = () => {
   return (
     <div>
-      <button><a href="home" >Home</a></button>
-      <button><a href="/options" >Asserts</a></button>
-      <button><a href="/game" >Game</a></button>
+      <button><Link to="/lobby" >Home</Link></button>
+      <button><Link to="/options" >Asserts</Link></button>
+      <button><Link to="/game" >Game</Link></button>
     </div>
   )
 }

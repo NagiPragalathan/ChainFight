@@ -10,6 +10,8 @@ import {
 import { useFrame, useThree } from "@react-three/fiber";
 import { easing } from "maath";
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import * as THREE from "three";
 import { Cactoro } from "./Cactoro";
 import {DragonEvolved} from "./Dragon_Evolved"
@@ -21,6 +23,10 @@ export const Experience = () => {
   useCursor(hovered);
   const controlsRef = useRef();
   const scene = useThree((state) => state.scene);
+  const navigate = useNavigate();
+
+
+  
 
   useEffect(() => {
     if (active) {
@@ -114,6 +120,8 @@ const MonsterStage = ({
 }) => {
   const map = useTexture(texture);
   const portalMaterial = useRef();
+  const navigate = useNavigate();
+
 
   useFrame((_state, delta) => {
     const worldOpen = active === name;
@@ -134,7 +142,9 @@ const MonsterStage = ({
       <RoundedBox
         name={name}
         args={[2, 3, 0.1]}
-        onDoubleClick={() => {window.location.href = name}}
+        onDoubleClick={() => {
+          console.log("clicked");
+          navigate(`/${name}`)}}
         onPointerEnter={() => setHovered(name)}
         onPointerLeave={() => setHovered(null)}
       >

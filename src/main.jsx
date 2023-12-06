@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Router>
       <Provider store={store}>
         <Routes>
-          <Route path="/" exact element={<App />} />
+          <Route path="/" exact element={<Lobby />} />
           <Route path="/lobby" exact element={<Lobby />} />
           <Route path="/game" exact element={<App />} />
           <Route path="/result" exact element={<Result />} />
